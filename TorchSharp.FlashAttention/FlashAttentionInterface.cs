@@ -317,7 +317,7 @@ namespace TorchSharp.FlashAttention {
         /// <returns>out: (batch_size, seqlen, nheads, headdim).</returns>
         public static torch.Tensor flash_attn_with_kvcache(torch.Tensor q, torch.Tensor k_cache, torch.Tensor v_cache, torch.Tensor? k = null, torch.Tensor? v = null, torch.Tensor? rotary_cos = null, torch.Tensor? rotary_sin = null, torch.Tensor? cache_seqlens = null, torch.Tensor? cache_batch_idx = null, torch.Tensor? block_table = null, float? softmax_scale = null, bool causal = false, (int left, int right)? window_size = null, bool rotary_interleaved = true, torch.Tensor? alibi_slopes = null, int num_splits = 0) {
             if (cache_seqlens is not null && cache_seqlens.numel() == 1) 
-                cache_seqlens = torch.full([k_cache.shape[0]], cache_seqlens.item<int>(), torch.int32, k_cache.device);
+                cache_seqlens = torch.full(1, k_cache.shape[0], cache_seqlens.item<int>(), torch.int32, k_cache.device);
 
             var ret = FlashAttentionFunctions.Utils.FlashAttentionForwardKVCache(q, k_cache, v_cache, k, v, rotary_cos, rotary_sin, cache_seqlens, cache_batch_idx, block_table, softmax_scale ?? MathF.Pow(q.shape[^1], -0.5f), causal, window_size ?? (-1, -1), rotary_interleaved, alibi_slopes, num_splits);
             // ret = [out, softmax_lse]

@@ -38,7 +38,7 @@ namespace TorchSharp.FlashAttention {
             var seqlensInBatch = attention_mask.sum(-1, type: torch.int32);
             var indices = torch.nonzero(attention_mask.flatten()).flatten();
             int maxSeqlensInBatch = seqlensInBatch.max().item<int>();
-            var cu_seqlens = torch.nn.functional.pad(torch.cumsum(seqlensInBatch, 0, torch.int32), [1, 0]);
+            var cu_seqlens = torch.nn.functional.pad(torch.cumsum(seqlensInBatch, 0, torch.int32), new long[] { 1, 0 });
 
             // Comment explaining why we use custom forward for indexing copied from python code:
             // TD [2022-03-04] We don't want to index with a bool mask, because Pytorch will expand the
@@ -47,7 +47,7 @@ namespace TorchSharp.FlashAttention {
             // index with integer indices. Moreover, torch's index is a bit slower than it needs to be,
             // so we write custom forward and backward to make it a bit faster.
             return new(
-                IndexFirstAxis.apply(hidden_states.view([-1, .. hidden_states.shape[2..]]), indices),
+                IndexFirstAxis.apply(hidden_states.view(new[] { -1L }.Concat(hidden_states.shape[2..]).ToArray()), indices),
                 indices,
                 cu_seqlens,
                 maxSeqlensInBatch
@@ -127,7 +127,7 @@ namespace TorchSharp.FlashAttention {
             var seqlensInBatch = attention_mask_in_length.flatten()[realIndicesIdx];
             var indices = torch.nonzero(attentionMask2D.flatten()).flatten();
             int maxSeqlensInBatch = seqlensInBatch.max().item<int>();
-            var cu_seqlens = torch.nn.functional.pad(torch.cumsum(seqlensInBatch, 0, torch.int32), [1, 0]);
+            var cu_seqlens = torch.nn.functional.pad(torch.cumsum(seqlensInBatch, 0, torch.int32), new[] { 1L, 0L });
 
             // Comment explaining why we use custom forward for indexing copied from python code:
             // TD [2022-03-04] We don't want to index with a bool mask, because Pytorch will expand the
@@ -136,7 +136,7 @@ namespace TorchSharp.FlashAttention {
             // index with integer indices. Moreover, torch's index is a bit slower than it needs to be,
             // so we write custom forward and backward to make it a bit faster.
             return new(
-                IndexFirstAxis.apply(hidden_states.view([-1, .. hidden_states.shape[2..]]), indices),
+                IndexFirstAxis.apply(hidden_states.view(new[] { -1L }.Concat(hidden_states.shape[2..]).ToArray()), indices),
                 indices,
                 cu_seqlens,
                 maxSeqlensInBatch
@@ -164,7 +164,7 @@ namespace TorchSharp.FlashAttention {
         /// <returns>hidden_states: (batch, seqlen, ...)</returns>
         public static torch.Tensor PadInput(torch.Tensor hidden_states, torch.Tensor indices, int batch, int seqlen) {
             var output = IndexPutFirstAxis.apply(hidden_states, indices, batch * seqlen);
-            return output.view([batch, -1, .. output.shape[1..]]);
+            return output.view(new[] { batch, -1L }.Concat(output.shape[1..]).ToArray());
         }
     }
 

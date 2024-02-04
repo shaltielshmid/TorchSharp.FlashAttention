@@ -17,7 +17,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             var (q, k, v, @out, softmax_lse, cu_seqlens_q, cu_seqlens_k, rng_state, alibi_slopes) = (saved[0], saved[1], saved[2], saved[3], saved[4], saved[5], saved[6], saved[7], saved[8]);
 
             var dq = torch.empty_like(q);
-            long[] kv_shape = [.. k.shape[..^2], 2, .. k.shape[^2..]];
+            long[] kv_shape = k.shape[..^2].Append(2).Concat(k.shape[^2..]).ToArray();
             var dkv = torch.empty(kv_shape, k.dtype, k.device);
 
             Utils.FlashAttentionVarLenBackward(
@@ -28,7 +28,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
 
             dq = dq.slice(-1, 0, dout.shape[^1], 1);
             dkv = dkv.slice(-1, 0, dout.shape[^1], 1);
-            return [dq, dkv, null];
+            return new() { dq, dkv, null };
         }
 
         public override List<torch.Tensor> forward(torch.autograd.AutogradContext ctx, params object[] vars) {
@@ -52,7 +52,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             // res = [out, q, k, v, out_padded, softmax_lse, S_dmask, rng_state]
             var (@out, q, k, v, out_padded, softmax_lse, S_dmask, rng_state) = (res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7]);
 
-            ctx.save_for_backward([q, k, v, out_padded, softmax_lse, cu_seqlens_q, cu_seqlens_k, rng_state, alibi_slopes]);
+            ctx.save_for_backward(new() { q, k, v, out_padded, softmax_lse, cu_seqlens_q, cu_seqlens_k, rng_state, alibi_slopes });
             ctx.save_data("dropout_p", dropout_p);
             ctx.save_data("max_seqlen_q", max_seqlen_q);
             ctx.save_data("max_seqlen_k", max_seqlen_k);
@@ -61,7 +61,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             ctx.save_data("window_size", window_size);
             ctx.save_data("deterministic", deterministic);
 
-            return return_softmax ? [out_padded, softmax_lse, S_dmask] : [@out, null, null];
+            return return_softmax ? new() { out_padded, softmax_lse, S_dmask } : new() { @out, null, null };
         }
     }
 }

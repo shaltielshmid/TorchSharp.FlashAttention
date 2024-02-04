@@ -29,12 +29,12 @@ namespace TorchSharp.FlashAttention {
             long seqlen = qkv.shape[1];
 
             if (key_padding_mask is null) {
-                qkv = qkv.view([-1, .. qkv.shape[2..]]);
+                qkv = qkv.view(new[] { -1L }.Concat(qkv.shape[2..]).ToArray());
                 int max_s = (int)seqlen;
                 var cu_seqlens = torch.arange(0, (batch_size + 1) * seqlen, step: seqlen, dtype: torch.int32, device: qkv.device);
 
                 var output = FlashAttentionInterface.flash_attn_varlen_qkvpacked_func(qkv, cu_seqlens, max_s, this.training ? _attention_dropout : 0f, _softmax_scale, _causal).@out;
-                return output.view([batch_size, -1, .. output.shape[1..]]);
+                return output.view(new[] { batch_size, -1L }.Concat(output.shape[1..]).ToArray());
             }
             else {
                 long nheads = qkv.shape[^2];

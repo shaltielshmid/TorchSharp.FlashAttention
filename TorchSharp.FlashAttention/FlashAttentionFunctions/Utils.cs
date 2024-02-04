@@ -71,8 +71,8 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions
         }
 
         public static List<torch.Tensor> FlashAttentionForwardKVCache(torch.Tensor q, torch.Tensor k_cache, torch.Tensor v_cache, torch.Tensor? k, torch.Tensor? v, torch.Tensor? rotary_cos, torch.Tensor? rotary_sin, torch.Tensor? cache_seqlens, torch.Tensor? cache_batch_idx, torch.Tensor? block_table, float softmax_scale, bool causal, (int left, int right) window_size, bool rotary_interleaved, torch.Tensor? alibi_slopes, int num_splits) {
-            if (k_cache.stride(-1) != 1) throw new ArgumentException(nameof(k_cache), "k_cache must have contiguous last dimension");
-            if (v_cache.stride(-1) != 1) throw new ArgumentException(nameof(v_cache), "v_cache must have contiguous last dimension");
+            if (k_cache.stride(-1) != 1) throw new ArgumentException("k_cache must have contiguous last dimension", nameof(k_cache));
+            if (v_cache.stride(-1) != 1) throw new ArgumentException("v_cache must have contiguous last dimension", nameof(v_cache));
 
             q = MaybeContiguous(q);
             k = k is null ? k : MaybeContiguous(k);
@@ -96,7 +96,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions
         internal static void CheckForErrors() {
             var error = NativeMethods.THSFlash_get_and_reset_last_err();
 
-            if (error != nint.Zero) {
+            if (error != IntPtr.Zero) {
                 throw new ExternalException(Marshal.PtrToStringAnsi(error));
             }
         }

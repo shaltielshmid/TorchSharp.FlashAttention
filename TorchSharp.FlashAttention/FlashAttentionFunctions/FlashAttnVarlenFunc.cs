@@ -29,7 +29,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             dq = dq.slice(-1, 0, dout.shape[^1], 1);
             dk = dk.slice(-1, 0, dout.shape[^1], 1);
             dv = dv.slice(-1, 0, dout.shape[^1], 1);
-            return [dq, dk, dv];
+            return new() { dq, dk, dv };
         }
 
         public override List<torch.Tensor> forward(torch.autograd.AutogradContext ctx, params object[] vars) {
@@ -54,7 +54,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             // res = [out, q, k, v, out_padded, softmax_lse, S_dmask, rng_state]
             var (@out, q, k, v, out_padded, softmax_lse, S_dmask, rng_state) = (res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7]);
 
-            ctx.save_for_backward([q, k, v, out_padded, softmax_lse, cu_seqlens_q, cu_seqlens_k, rng_state, alibi_slopes]);
+            ctx.save_for_backward(new() { q, k, v, out_padded, softmax_lse, cu_seqlens_q, cu_seqlens_k, rng_state, alibi_slopes });
             ctx.save_data("dropout_p", dropout_p);
             ctx.save_data("max_seqlen_q", max_seqlen_q);
             ctx.save_data("max_seqlen_k", max_seqlen_k);
@@ -63,7 +63,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             ctx.save_data("window_size", window_size);
             ctx.save_data("deterministic", deterministic);
 
-            return return_softmax ? [out_padded, softmax_lse, S_dmask] : [@out, null, null];
+            return return_softmax ? new() { out_padded, softmax_lse, S_dmask } : new() { @out, null, null };
         }
     }
 }

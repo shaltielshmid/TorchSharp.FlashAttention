@@ -16,11 +16,11 @@ namespace TorchSharp.FlashAttention.BertPaddingFunctions {
             var grad_output = grad_outputs[0];
             var grad_input = grad_outputs[1];
 
-            indices = indices.reshape([indices.shape[0], .. Enumerable.Repeat(1, (int)grad_output.ndim - 1)]);
+            indices = indices.reshape(new[] { indices.shape[0] }.Concat(Enumerable.Repeat(1L, (int)grad_output.ndim - 1)).ToArray());
             indices = indices.expand_as(grad_output);
 
             grad_input.scatter_add_(0, indices, grad_output);
-            return [grad_input.reshape([firstAxisDim, .. grad_output.shape[1..]]), null];
+            return new() { grad_input.reshape(new[] { firstAxisDim }.Concat(grad_output.shape[1..]).ToArray()), null };
         }
 
         public static List<torch.Tensor> apply(torch.Tensor input, torch.Tensor indices) {
@@ -31,11 +31,11 @@ namespace TorchSharp.FlashAttention.BertPaddingFunctions {
             var input = (torch.Tensor)vars[0];
             var indices = (torch.Tensor)vars[1];
 
-            ctx.save_for_backward([indices]);
+            ctx.save_for_backward(new() { indices });
             ctx.save_data("first_axis_dim", input.shape[0]);
 
             var output = input[indices];
-            return [output, input.detach()];
+            return new() { output, input.detach() };
         }
     }
 }

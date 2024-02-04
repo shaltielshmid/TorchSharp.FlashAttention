@@ -17,13 +17,13 @@ namespace TorchSharp.FlashAttention.BertPaddingFunctions {
 
             // rearrange(grad_output, "b ... -> b (...)")
             grad_output = grad_output.view(grad_output.size(0), -1);
-            var grad_input = torch.zeros([firstAxisDim, grad_output.shape[1]], dtype: grad_output.dtype, device: grad_output.device);
+            var grad_input = torch.zeros(new[] { firstAxisDim, grad_output.shape[1] }, dtype: grad_output.dtype, device: grad_output.device);
 
             // repeat(indices, "z -> z d", d=grad_output.shape[1])
             var repeatedIndices = indices.repeat(1, grad_output.shape[1]);
 
             grad_input.scatter_(0, repeatedIndices, grad_output);
-            return [grad_input.reshape(otherShape.Prepend(firstAxisDim).ToArray())];
+            return new() { grad_input.reshape(otherShape.Prepend(firstAxisDim).ToArray()) };
         }
 
         public static torch.Tensor apply(torch.Tensor input, torch.Tensor indices) {
@@ -34,7 +34,7 @@ namespace TorchSharp.FlashAttention.BertPaddingFunctions {
             var input = (torch.Tensor)vars[0];
             var indices = (torch.Tensor)vars[1];
 
-            ctx.save_for_backward([indices]);
+            ctx.save_for_backward(new() { indices });
             ctx.save_data("first_axis_dim", input.shape[0]);
 
             var otherShape = input.shape[1..];
