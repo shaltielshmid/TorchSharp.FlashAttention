@@ -40,15 +40,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
-    <None Include="..\Redist\flash-attn-$(FlashAttentionVersion)\compiled-runtimes\win-x64\native\flash_attn.dll" Link="runtimes\win-x64\native\flash_attn.dll">
+    <None Include="..\Redist\compiled-runtimes\win-x64\native\flash_attn.dll" Link="runtimes\win-x64\native\flash_attn.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
-    <None Include="..\Redist\flash-attn-$(FlashAttentionVersion)\compiled-runtimes\win-x64\native\flash_attn.lib" Link="runtimes\win-x64\native\flash_attn.lib">
+    <None Include="..\Redist\compiled-runtimes\win-x64\native\flash_attn.lib" Link="runtimes\win-x64\native\flash_attn.lib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>      
     </None>
-    <None Include="..\Redist\flash-attn-$(FlashAttentionVersion)\compiled-runtimes\win-x64\native\flash_attn.exp" Link="runtimes\win-x64\native\flash_attn.exp">
+    <None Include="..\Redist\compiled-runtimes\win-x64\native\flash_attn.exp" Link="runtimes\win-x64\native\flash_attn.exp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
@@ -59,7 +59,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
-    <None Include="..\Redist\flash-attn-$(FlashAttentionVersion)\compiled-runtimes\linux-x64\native\libflash_attn.so" Link="runtimes\linux-x64\native\libflash_attn.so">
+    <None Include="..\Redist\compiled-runtimes\linux-x64\native\libflash_attn.so" Link="runtimes\linux-x64\native\libflash_attn.so">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
