@@ -25,7 +25,7 @@ The package currently references FlashAttention 2.5.2, including AliBi embedding
 The interfaces that have been ported over:
 
 ```cs
-# FlashAttentionInterface
+// FlashAttentionInterface
 FlashAttentionInterface.flash_attn_func(...);
 FlashAttentionInterface.flash_attn_kvpacked_func(...);
 FlashAttentionInterface.flash_attn_qkvpacked_func(...);
@@ -34,7 +34,7 @@ FlashAttentionInterface.flash_attn_varlen_kvpacked_func(...);
 FlashAttentionInterface.flash_attn_varlen_qkvpacked_func(...);
 FlashAttentionInterface.flash_attn_with_kvcache(...);
 
-# BertPadding
+// BertPadding
 BertPadding.pad_input(...);
 BertPadding.unpad_input(...);
 BertPadding.unpad_input_for_concatenated_sequences(...);
