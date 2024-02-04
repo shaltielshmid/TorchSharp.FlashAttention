@@ -40,7 +40,7 @@ add_library(LibFlashAttention SHARED ${SOURCES} ${HEADERS})
 target_link_libraries(LibFlashAttention
     ${TORCH_LIBRARIES}
     ${CUDA_LIBRARIES}
-    ${FLASH_PATH}/../compiled-runtimes/linux-x64/native/libflash_attn.so
+    ${FLASH_PATH}/../../compiled-runtimes/linux-x64/native/libflash_attn.so
 )
 
 # Set properties

@@ -50,17 +50,17 @@ using TorchSharp.FlashAttention;
 
 var (batch_size, seqlen, headdim, nheads) = (5, 12, 32, 4)
 var qkv = torch.rand([batch_size, seqlen, 3, nheads, headdim]).half().cuda();
-var result = FlashAttentionInterface.flash_attn_qkvpacked_func(qkv);
+var (result, _, _) = FlashAttentionInterface.flash_attn_qkvpacked_func(qkv);
 ```
 
 Comparison to Python:
 
 ```python
-from flash_attn import flash_attn_varlen_qkvpacked_func
+from flash_attn import flash_attn_qkvpacked_func
 
 batch_size, seqlen, headdim, heads = 5, 12, 32, 4
 qkv = torch.rand(batch_size, seqlen, 3, heads, headdim).half().cuda()
-res = flash_attn_varlen_qkvpacked_func(qkv)
+res = flash_attn_qkvpacked_func(qkv)
 ```
 
 ### Example using the FlashAttention module
