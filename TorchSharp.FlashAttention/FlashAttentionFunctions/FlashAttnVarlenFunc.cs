@@ -29,7 +29,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             dq = dq.slice(-1, 0, dout.shape[^1], 1);
             dk = dk.slice(-1, 0, dout.shape[^1], 1);
             dv = dv.slice(-1, 0, dout.shape[^1], 1);
-            return new() { dq, dk, dv };
+            return new() { dq, dk, dv, null, null, null, null, null, null, null, null, null, null, null };
         }
 
         public override List<torch.Tensor> forward(torch.autograd.AutogradContext ctx, params object[] vars) {

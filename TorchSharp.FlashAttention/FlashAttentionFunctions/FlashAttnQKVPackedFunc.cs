@@ -26,7 +26,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
                     ((int, int))ctx.get_data("window_size"), alibi_slopes, (bool)ctx.get_data("deterministic"), rng_state);
 
             dqkv = dqkv.slice(-1, 0, dout.shape[^1], 1);
-            return new() { dqkv, null, null };
+            return new() { dqkv, null, null, null, null, null, null, null };
         }
 
         public override List<torch.Tensor> forward(torch.autograd.AutogradContext ctx, params object[] vars) {

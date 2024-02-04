@@ -67,7 +67,7 @@ res = flash_attn_qkvpacked_func(qkv)
 
 In addition to the interface, we also include a custom TorchSharp module for applying QKV packed attention, with a custom key-padding mask:
 
-```
+```cs
 using TorchSharp.FlashAttention;
 using TorchSharp;
 
