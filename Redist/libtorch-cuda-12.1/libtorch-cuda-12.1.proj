@@ -1,0 +1,30 @@
+<Project>
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Directory.Build.props))\Directory.Build.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+
+    <LibTorchCudaArchiveBase>$(LibTorchArchiveCoreName)-$(LibTorchVersion)$(LibTorchCudaArchiveNameSuffix)%252Bcu$(CudaVersionNoDot).zip</LibTorchCudaArchiveBase>
+    <ArchiveUrl>https://download.pytorch.org/libtorch/cu$(CudaVersionNoDot)/$(LibTorchCudaArchiveBase)</ArchiveUrl>
+    <DownloadedArchiveFolder>$(MSBuildThisFileDirectory)../$(MSBuildProjectName)/</DownloadedArchiveFolder>
+    <DownloadedArchiveFileName>libtorch-cu$(CudaVersionNoDot)-$(LibTorchVersion).zip</DownloadedArchiveFileName>
+    <DownloadedArchiveFileName>$(LibTorchCudaArchiveBase)</DownloadedArchiveFileName>
+
+    <DownloadedArchive>$(DownloadedArchiveFolder)$(DownloadedArchiveFileName)</DownloadedArchive>
+    <IntermediateOutputPath>$(ObjDir)$(MSBuildProjectName)/</IntermediateOutputPath>
+    <ExtractDirectory>$(IntermediateOutputPath)$(LibTorchArchiveCoreName)</ExtractDirectory>
+  </PropertyGroup>
+
+  <Target Name="DownloadAndExtractLibtorch" Inputs="..\..\..\LICENSE" Outputs="$(DownloadedArchive)">
+    <MakeDir Directories="$(DownloadedArchiveFolder)" />
+    <DownloadFile SourceUrl="$(ArchiveUrl)" DestinationFolder="$(DownloadedArchiveFolder)" DestinationFileName="$(DownloadedArchiveFileName)" Condition="!Exists('$(DownloadedArchive)')" />
+    <MakeDir Directories="$(ExtractDirectory)" />
+    <Unzip SourceFiles="$(DownloadedArchive)" DestinationFolder="$(ExtractDirectory)" OverwriteReadOnlyFiles="true" />
+  </Target>
+
+  <Target Name="Build" DependsOnTargets="DownloadAndExtractLibtorch" />
+
+  <Target Name="Clean">
+    <RemoveDir Directories="$(IntermediateOutputPath)" />
+  </Target>
+</Project>

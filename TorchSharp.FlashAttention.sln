@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TorchSharp.FlashAttention", "TorchSharp.FlashAttention\TorchSharp.FlashAttention.csproj", "{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Native", "Native", "{F6E0E59C-EBD2-4362-B354-9ADB9688499D}"
+	ProjectSection(SolutionItems) = preProject
+		Native\build.proj = Native\build.proj
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibFlashAttention", "Native\LibFlashAttention\LibFlashAttention.vcxproj", "{415B44AC-2410-455E-B73C-8EB92C9E137F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Redist", "Redist", "{D8C60CD8-8429-45F2-A755-47B6CD10FDF8}"
+	ProjectSection(SolutionItems) = preProject
+		Redist\flash-attn-2.5.2\flash-attn-2.5.2.proj = Redist\flash-attn-2.5.2\flash-attn-2.5.2.proj
+		Redist\libtorch-cuda-12.1\libtorch-cuda-12.1.proj = Redist\libtorch-cuda-12.1\libtorch-cuda-12.1.proj
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4E6477E2-7EE0-48E5-B4BE-CC4C1748167B}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies.props = Dependencies.props
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Debug|x64.Build.0 = Debug|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Debug|x86.Build.0 = Debug|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Release|x64.Build.0 = Release|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A4BF62A-BA59-4FEA-8772-D2C71BE44BFD}.Release|x86.Build.0 = Release|Any CPU
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Debug|Any CPU.Build.0 = Debug|x64
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Debug|x64.ActiveCfg = Debug|x64
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Debug|x64.Build.0 = Debug|x64
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Debug|x86.ActiveCfg = Debug|Win32
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Debug|x86.Build.0 = Debug|Win32
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Release|Any CPU.ActiveCfg = Release|x64
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Release|Any CPU.Build.0 = Release|x64
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Release|x64.ActiveCfg = Release|x64
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Release|x64.Build.0 = Release|x64
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Release|x86.ActiveCfg = Release|Win32
+		{415B44AC-2410-455E-B73C-8EB92C9E137F}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{415B44AC-2410-455E-B73C-8EB92C9E137F} = {F6E0E59C-EBD2-4362-B354-9ADB9688499D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {237F8D89-BC3B-44C4-980D-5D7B3CAE0D23}
+	EndGlobalSection
+EndGlobal

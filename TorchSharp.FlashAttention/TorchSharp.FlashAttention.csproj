@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Dependencies.props))\Dependencies.props" />
+  
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- Trigger the download+placement of the redist bits and the build of the C++ project -->
+  <Target Name="BuildNativeLibTorch" BeforeTargets="BeforeBuild">
+    <Message Importance="High" Text="Using VersionSuffix = $(VersionSuffix)" />
+    <Message Importance="High" Text="Using Version = $(Version)" />
+    <MSBuild Projects="..\Redist\libtorch-cuda-$(CudaVersionDot)\libtorch-cuda-$(CudaVersionDot).proj" Condition="'$(SkipNative)' != 'true'" RemoveProperties="TargetFramework" Targets="Build" />
+    <MSBuild Projects="..\Redist\flash-attn-$(FlashAttentionVersion)\flash-attn-$(FlashAttentionVersion).proj" Condition="'$(SkipNative)' != 'true'" RemoveProperties="TargetFramework" Targets="Build" />
+    <MSBuild Projects="..\Native\build.proj" Condition="'$(SkipNative)' != 'true'" RemoveProperties="TargetFramework" Targets="Build" />
+  </Target>
+
+  <Target Name="RealPack">
+    <MSBuild Projects="..\..\pkg\pack.proj" Targets="Pack" />
+  </Target>
+
+  <ItemGroup>
+    <Reference Include="TorchSharp">
+      <HintPath>..\..\TorchSharp\bin\AnyCPU.Release\TorchSharp\net6.0\TorchSharp.dll</HintPath>
+    </Reference>
+    <!--PackageReference Include="TorchSharp" Version="[0.101.3,)" PrivateAssets="All" /-->
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetOS)' == 'windows'">
+    <None Include="..\x64\Release\LibFlashAttention.dll" Link="runtimes\win-x64\native\LibFlashAttention.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+    </None>
+    <None Include="..\x64\Release\LibFlashAttention.lib" Link="runtimes\win-x64\native\LibFlashAttention.lib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+    </None>
+    <None Include="..\x64\Release\LibFlashAttention.exp" Link="runtimes\win-x64\native\LibFlashAttention.exp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+    </None>
+    <None Include="..\Redist\flash-attn-$(FlashAttentionVersion)\compiled-runtimes\win-x64\native\flash_attn.dll" Link="runtimes\win-x64\native\flash_attn.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+    </None>
+    <None Include="..\Redist\flash-attn-$(FlashAttentionVersion)\compiled-runtimes\win-x64\native\flash_attn.lib" Link="runtimes\win-x64\native\flash_attn.lib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>      
+    </None>
+    <None Include="..\Redist\flash-attn-$(FlashAttentionVersion)\compiled-runtimes\win-x64\native\flash_attn.exp" Link="runtimes\win-x64\native\flash_attn.exp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetOS)' == 'linux'">
+    <None Include="..\Native\build\libLibFlashAttention.so" Link="runtimes\linux-x64\native\libLibFlashAttention.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+    </None>
+    <None Include="..\Redist\flash-attn-$(FlashAttentionVersion)\compiled-runtimes\linux-x64\native\libflash_attn.so" Link="runtimes\linux-x64\native\libflash_attn.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+    </None>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <AssemblyName Condition="'$(TargetOS)' == 'linux'">TorchSharp.FlashAttention-linux</AssemblyName>
+    <AssemblyName Condition="'$(TargetOS)' == 'windows'">TorchSharp.FlashAttention-windows</AssemblyName>
+    <Authors>Shaltiel Shmidman</Authors>
+    <!--PackageReadmeFile>README.md</PackageReadmeFile-->
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/shaltielshmid/TorchSharp.FlashAttention</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/shaltielshmid/TorchSharp.FlashAttention.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+  </PropertyGroup>
+
+</Project>

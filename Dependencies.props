@@ -1,0 +1,12 @@
+<Project>
+
+  <!-- Other/Non-Core Product Dependencies -->
+  <PropertyGroup>
+    <LibTorchVersion>2.1.0</LibTorchVersion>
+    <CudaVersionDot>12.1</CudaVersionDot>
+    <CudaVersionNoDot>121</CudaVersionNoDot>
+    <CudaPath>$(CUDA_PATH_V12_1)</CudaPath>
+    <FlashAttentionVersion>2.5.2</FlashAttentionVersion>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,24 @@
+<Project>
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Directory.Build.props))\Directory.Build.props" />
+
+  <!-- Target that builds all the native binaries in the Native folder -->
+  <Target Name="Build" DependsOnTargets="BuildNativeUnix;BuildNativeWindows" />
+
+  <Target Name="BuildNativeUnix" Condition="'$(OS)' != 'Windows_NT'">
+    <PropertyGroup>
+      <EnvLibTorchPath>$(MSBuildProjectDirectory)/../Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch</EnvLibTorchPath>
+      <EnvCudaPath>$(CudaPath)</EnvCudaPath>
+      <EnvFlashAttentionPath>$(MSBuildProjectDirectory)/../Redist/flash-attn-$(FlashAttentionVersion)/flash-attention</EnvFlashAttentionPath>
+      <BuildEnvArgs>LIBTORCH_PATH=$(EnvLibTorchPath) CUDA_PATH=$(EnvCudaPath) FLASH_PATH=$(EnvFlashAttentionPath)</BuildEnvArgs>
+    </PropertyGroup>
+    
+    <Message Text="$(BuildEnvArgs) $(MSBuildProjectDirectory)/build.sh" Importance="High"/>
+    <Exec Command="$(BuildEnvArgs) &quot;$(MSBuildProjectDirectory)/build.sh&quot;" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
+  <Target Name="BuildNativeWindows"
+          Condition="'$(OS)' == 'Windows_NT'">
+    
+    <MSBuild Projects="$(MSBuildProjectDirectory)/LibFlashAttention/LibFlashAttention.vcxproj" Condition="'$(SkipNative)' != 'true'" RemoveProperties="TargetFramework" Targets="Build" />
+  </Target>
+</Project>
