@@ -1,7 +1,7 @@
-if [ -d "build" ]; then
-    rm -rf build
+if [ -d "build-linux" ]; then
+    rm -rf build-linux
 fi
-mkdir build
-cd build
+mkdir build-linux
+cd build-linux
 cmake ../LibFlashAttention -DLIBTORCH_PATH=$LIBTORCH_PATH -DCUDA_TOOLKIT_ROOT_DIR=$CUDA_PATH -DFLASH_PATH=$FLASH_PATH
 cmake --build . --config Release

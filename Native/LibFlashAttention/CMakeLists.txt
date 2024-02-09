@@ -8,7 +8,7 @@ find_package(CUDA REQUIRED)
 # Path to LibTorch
 find_package(Torch REQUIRED PATHS ${LIBTORCH_PATH})
 
-find_library(FLASH_ATTN_LIB NAMES flash_attn PATHS ${FLASH_PATH}/../../compiled-runtimes/linux-x64/native)
+find_library(FLASH_ATTN_LIB NAMES flash_attn PATHS ${FLASH_PATH}/../../compiled-runtimes/win-x64/native ${FLASH_PATH}/../../compiled-runtimes/linux-x64/native)
 if(NOT FLASH_ATTN_LIB)
     message(FATAL_ERROR "libflash_attn.so not found")
 endif()
@@ -50,3 +50,4 @@ target_link_libraries(LibFlashAttention
 
 # Set properties
 set_property(TARGET LibFlashAttention PROPERTY CXX_STANDARD 17)
+target_compile_definitions(LibFlashAttention PRIVATE CXX_BUILD)

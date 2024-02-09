@@ -28,15 +28,15 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetOS)' == 'windows'">
-    <None Include="..\x64\Release\LibFlashAttention.dll" Link="runtimes\win-x64\native\LibFlashAttention.dll">
+    <None Include="..\Native\build-win\Release\LibFlashAttention.dll" Link="runtimes\win-x64\native\LibFlashAttention.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
-    <None Include="..\x64\Release\LibFlashAttention.lib" Link="runtimes\win-x64\native\LibFlashAttention.lib">
+    <None Include="..\Native\build-win\Release\LibFlashAttention.lib" Link="runtimes\win-x64\native\LibFlashAttention.lib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
-    <None Include="..\x64\Release\LibFlashAttention.exp" Link="runtimes\win-x64\native\LibFlashAttention.exp">
+    <None Include="..\Native\build-win\Release\LibFlashAttention.exp" Link="runtimes\win-x64\native\LibFlashAttention.exp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
@@ -55,7 +55,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetOS)' == 'linux'">
-    <None Include="..\Native\build\libLibFlashAttention.so" Link="runtimes\linux-x64\native\libLibFlashAttention.so">
+    <None Include="..\Native\build-linux\libLibFlashAttention.so" Link="runtimes\linux-x64\native\libLibFlashAttention.so">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>

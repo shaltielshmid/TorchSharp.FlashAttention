@@ -158,4 +158,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" Condition="'$(OS)' == 'Windows_NT'" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+    <Target Name="Build">
+  <!-- Intentionally left blank to disable standard build -->
+  </Target>
 </Project>
