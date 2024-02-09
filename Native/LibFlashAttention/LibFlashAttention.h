@@ -2,7 +2,7 @@
 
 #include "Utils.h"
 #include "Stdafx.h"
-#include "flash_api.h"
+#include "flash_api.cpp" 
 
 EXPORT_API(void) THSFlash_MHA_FWD(const Tensor q, const Tensor k, const Tensor v, const Tensor out_, const Tensor alibi_slopes_, const float p_dropout, const float softmax_scale, const bool is_causal, const int window_size_left, const int window_size_right, const bool return_softmax, const Generator gen_, Tensor* (*allocator)(size_t length));
 

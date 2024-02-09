@@ -32,7 +32,7 @@
     <RootNamespace>LibFlashAttention</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" Condition="'$(OS)' == 'Windows_NT'"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" Condition="'$(OS)' == 'Windows_NT'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -59,7 +59,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" Condition="'$(OS)' == 'Windows_NT'"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" Condition="'$(OS)' == 'Windows_NT'" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
@@ -127,7 +127,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(SolutionDir)/Redist/flash-attn-$(FlashAttentionVersion)/compiled-runtimes/win-x64/native/flash_attn.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/c10.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/kineto.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/torch.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/torch_cpu.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(SolutionDir)Redist/compiled-runtimes/win-x64/native/flash_attn.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/c10.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/kineto.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/torch.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/torch_cpu.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalIncludeDirectories>$(SolutionDir)\Redist\libtorch-cuda-$(LibTorchVersion)\libtorch-cuda-$(LibTorchVersion)\libtorch\libtorch\include;$(SolutionDir)\Redist\libtorch-cuda-$(LibTorchVersion)\libtorch-cuda-$(LibTorchVersion)\libtorch\libtorch\include\torch\csrc\api\include;$(SolutionDir)\Redist\libtorch-cuda-$(LibTorchVersion)\libtorch-cuda-$(LibTorchVersion)\libtorch\libtorch\include\torch\csrc\api\include\torch;$(SolutionDir)\Redist\flash-attn-$(FlashAttentionVersion)\flash-attention\csrc\flash_attn;$(SolutionDir)\Redist\flash-attn-$(FlashAttentionVersion)\flash-attention\csrc\cutlass\include;$(CudaPath)\include;</AdditionalIncludeDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -151,14 +151,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(SolutionDir)/Redist/flash-attn-$(FlashAttentionVersion)/compiled-runtimes/win-x64/native/flash_attn.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/c10.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/kineto.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/torch.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/torch_cpu.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(SolutionDir)Redist/compiled-runtimes/win-x64/native/flash_attn.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/c10.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/kineto.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/torch.lib;$(SolutionDir)/Redist/libtorch-cuda-$(CudaVersionDot)/libtorch-cuda-$(CudaVersionDot)/$(LibTorchArchiveCoreName)/libtorch/lib/torch_cpu.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalIncludeDirectories>$(SolutionDir)\Redist\libtorch-cuda-$(LibTorchVersion)\libtorch-cuda-$(LibTorchVersion)\libtorch\libtorch\include;$(SolutionDir)\Redist\libtorch-cuda-$(LibTorchVersion)\libtorch-cuda-$(LibTorchVersion)\libtorch\libtorch\include\torch\csrc\api\include;$(SolutionDir)\Redist\libtorch-cuda-$(LibTorchVersion)\libtorch-cuda-$(LibTorchVersion)\libtorch\libtorch\include\torch\csrc\api\include\torch;$(SolutionDir)\Redist\flash-attn-$(FlashAttentionVersion)\flash-attention\csrc\flash_attn;$(SolutionDir)\Redist\flash-attn-$(FlashAttentionVersion)\flash-attention\csrc\cutlass\include;$(CudaPath)\include;</AdditionalIncludeDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" Condition="'$(OS)' == 'Windows_NT'"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" Condition="'$(OS)' == 'Windows_NT'" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <Target Name="Build" Condition="'$(OS)' != 'Windows_NT'">
-  <!-- Intentionally left blank to disable standard build -->
-  </Target>
 </Project>
