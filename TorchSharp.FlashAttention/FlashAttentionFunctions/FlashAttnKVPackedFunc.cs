@@ -12,7 +12,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
     internal class FlashAttnKVPackedFunc : torch.autograd.MultiTensorFunction<FlashAttnKVPackedFunc> {
         public override string Name => nameof(FlashAttnKVPackedFunc);
 
-        public override List<torch.Tensor> backward(torch.autograd.AutogradContext ctx, List<torch.Tensor> grad_outputs) {
+        public override List<torch.Tensor?> backward(torch.autograd.AutogradContext ctx, List<torch.Tensor> grad_outputs) {
             var dout = grad_outputs[0];
 
             var saved = ctx.get_saved_variables();

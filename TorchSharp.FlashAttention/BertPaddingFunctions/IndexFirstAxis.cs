@@ -9,7 +9,7 @@ namespace TorchSharp.FlashAttention.BertPaddingFunctions {
     internal class IndexFirstAxis : torch.autograd.SingleTensorFunction<IndexFirstAxis> {
         public override string Name => nameof(IndexFirstAxis);
 
-        public override List<torch.Tensor> backward(torch.autograd.AutogradContext ctx, torch.Tensor grad_output) {
+        public override List<torch.Tensor?> backward(torch.autograd.AutogradContext ctx, torch.Tensor grad_output) {
             var indices = ctx.get_saved_variables()[0];
             long firstAxisDim = (long)ctx.get_data("first_axis_dim");
 
