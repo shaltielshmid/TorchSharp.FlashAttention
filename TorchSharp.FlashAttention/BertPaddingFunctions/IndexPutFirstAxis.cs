@@ -12,7 +12,7 @@ namespace TorchSharp.FlashAttention.BertPaddingFunctions {
         public override List<torch.Tensor> backward(torch.autograd.AutogradContext ctx, torch.Tensor grad_output) {
             var indices = ctx.get_saved_variables()[0];
 
-            return new() { grad_output[indices] };
+            return new() { grad_output[indices], null, null };
         }
 
         public static torch.Tensor apply(torch.Tensor values, torch.Tensor indices, long first_axis_dim) {

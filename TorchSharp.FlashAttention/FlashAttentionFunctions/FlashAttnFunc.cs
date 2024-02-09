@@ -56,7 +56,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             ctx.save_data("window_size", window_size);
             ctx.save_data("deterministic", deterministic);
 
-            return return_softmax ? new() { out_padded, softmax_lse, S_dmask } : new() { @out, null, null };
+            return return_softmax ? new() { out_padded, softmax_lse, S_dmask } : new() { @out };
         }
     }
 }

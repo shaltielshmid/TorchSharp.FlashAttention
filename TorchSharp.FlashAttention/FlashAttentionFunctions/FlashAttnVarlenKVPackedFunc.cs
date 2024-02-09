@@ -21,7 +21,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             var dkv = torch.empty(kv_shape, k.dtype, k.device);
 
             Utils.FlashAttentionVarLenBackward(
-                    dout, q, k, v, @out, softmax_lse, dq, dkv[.., .., 0], dkv[.., .., 1],
+                    dout, q, k, v, @out, softmax_lse, dq, dkv[.., 0], dkv[.., 1],
                     cu_seqlens_q, cu_seqlens_k, (int)ctx.get_data("max_seqlen_q"), (int)ctx.get_data("max_seqlen_k"),
                     (float)ctx.get_data("dropout_p"), (float)ctx.get_data("softmax_scale"), (bool)ctx.get_data("causal"), 
                     ((int, int))ctx.get_data("window_size"), alibi_slopes, (bool)ctx.get_data("deterministic"), rng_state);
@@ -47,7 +47,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             bool return_softmax = (bool)vars[12];
 
             var res = Utils.FlashAttentionVarLenForward(
-                    q_input, kv[.., .., 0], kv[.., .., 1], cu_seqlens_q, cu_seqlens_k, max_seqlen_q, max_seqlen_k,
+                    q_input, kv[.., 0], kv[.., 1], cu_seqlens_q, cu_seqlens_k, max_seqlen_q, max_seqlen_k,
                     dropout_p, softmax_scale, causal, window_size, alibi_slopes, return_softmax);
             // res = [out, q, k, v, out_padded, softmax_lse, S_dmask, rng_state]
             var (@out, q, k, v, out_padded, softmax_lse, S_dmask, rng_state) = (res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7]);
@@ -61,7 +61,7 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions {
             ctx.save_data("window_size", window_size);
             ctx.save_data("deterministic", deterministic);
 
-            return return_softmax ? new() { out_padded, softmax_lse, S_dmask } : new() { @out, null, null };
+            return return_softmax ? new() { out_padded, softmax_lse, S_dmask } : new() { @out };
         }
     }
 }

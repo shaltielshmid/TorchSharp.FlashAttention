@@ -58,7 +58,7 @@ namespace TorchSharp.FlashAttention {
         /// Alias of `BertPadding.UnpadInputForConcatenatedSequences` returning a desconstructable tuple instead of a record.
         /// </summary>
         /// <param name="hidden_states">(batch, seqlen, ...)</param>
-        /// <param name="attention_mask">(batch, seqlen), bool / int, 1 means valid and 0 means not valid.</param>
+        /// <param name="attention_mask_in_length">(batch, seqlen), bool / int, 1 means valid and 0 means not valid.</param>
         /// <returns>
         /// hidden_states: (total_nnz, ...), where total_nnz = number of tokens in selected in attention_mask.
         /// indices: (total_nnz), the indices of non-masked tokens from the flattened input sequence.

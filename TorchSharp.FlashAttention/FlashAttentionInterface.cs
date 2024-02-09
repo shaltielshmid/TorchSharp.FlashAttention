@@ -81,7 +81,7 @@ namespace TorchSharp.FlashAttention {
         /// </returns>
         public static (torch.Tensor @out, torch.Tensor? softmax_lse, torch.Tensor? S_dmask) flash_attn_kvpacked_func(torch.Tensor q, torch.Tensor kv, float dropout_p = 0, float? softmax_scale = null, bool causal = false, (int left, int right)? window_size = null, torch.Tensor? alibi_slopes = null, bool deterministic = false, bool return_attn_probs = false) {
             var ret = FlashAttnKVPackedFunc.apply(q, kv, dropout_p, softmax_scale, causal, window_size ?? (-1, -1), alibi_slopes, deterministic, return_attn_probs);
-            return (ret[0], ret[1], ret[2]);
+            return ret.Count == 1 ? (ret[0], null, null) : (ret[0], ret[1], ret[2]);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace TorchSharp.FlashAttention {
         /// </returns>
         public static (torch.Tensor @out, torch.Tensor? softmax_lse, torch.Tensor? S_dmask) flash_attn_func(torch.Tensor q, torch.Tensor k, torch.Tensor v, float dropout_p = 0, float? softmax_scale = null, bool causal = false, (int left, int right)? window_size = null, torch.Tensor? alibi_slopes = null, bool deterministic = false, bool return_attn_probs = false) {
             var ret = FlashAttnFunc.apply(q, k, v, dropout_p, softmax_scale, causal, window_size ?? (-1, -1), alibi_slopes, deterministic, return_attn_probs);
-            return (ret[0], ret[1], ret[2]);
+            return ret.Count == 1 ? (ret[0], null, null) : (ret[0], ret[1], ret[2]);
         }
 
 
@@ -205,7 +205,7 @@ namespace TorchSharp.FlashAttention {
         /// </returns>
         public static (torch.Tensor @out, torch.Tensor? softmax_lse, torch.Tensor? S_dmask) flash_attn_varlen_kvpacked_func(torch.Tensor q, torch.Tensor kv, torch.Tensor cu_seqlens_q, torch.Tensor cu_seqlen_k, int max_seqlen_q, int max_seqlen_k, float dropout_p = 0f, float? softmax_scale = null, bool causal = false, (int left, int right)? window_size = null, torch.Tensor? alibi_slopes = null, bool deterministic = false, bool return_attn_probs = false) {
             var ret = FlashAttnVarlenKVPackedFunc.apply(q, kv, cu_seqlens_q, cu_seqlen_k, max_seqlen_q, max_seqlen_k, dropout_p, softmax_scale, causal, window_size ?? (-1, -1), alibi_slopes, deterministic, return_attn_probs);
-            return (ret[0], ret[1], ret[2]);
+            return ret.Count == 1 ? (ret[0], null, null) : (ret[0], ret[1], ret[2]);
         }
 
 
@@ -253,7 +253,7 @@ namespace TorchSharp.FlashAttention {
         /// </returns>
         public static (torch.Tensor @out, torch.Tensor? softmax_lse, torch.Tensor? S_dmask) flash_attn_varlen_func(torch.Tensor q, torch.Tensor k, torch.Tensor v, torch.Tensor cu_seqlens_q, torch.Tensor cu_seqlen_k, int max_seqlen_q, int max_seqlen_k, float dropout_p = 0f, float? softmax_scale = null, bool causal = false, (int left, int right)? window_size = null, torch.Tensor? alibi_slopes = null, bool deterministic = false, bool return_attn_probs = false) {
             var ret = FlashAttnVarlenFunc.apply(q, k, v, cu_seqlens_q, cu_seqlen_k, max_seqlen_q, max_seqlen_k, dropout_p, softmax_scale, causal, window_size ?? (-1, -1), alibi_slopes, deterministic, return_attn_probs);
-            return (ret[0], ret[1], ret[2]);
+            return ret.Count == 1 ? (ret[0], null, null) : (ret[0], ret[1], ret[2]);
         }
 
         /// <summary>

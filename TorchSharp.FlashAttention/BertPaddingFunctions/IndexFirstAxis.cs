@@ -20,10 +20,10 @@ namespace TorchSharp.FlashAttention.BertPaddingFunctions {
             var grad_input = torch.zeros(new[] { firstAxisDim, grad_output.shape[1] }, dtype: grad_output.dtype, device: grad_output.device);
 
             // repeat(indices, "z -> z d", d=grad_output.shape[1])
-            var repeatedIndices = indices.repeat(1, grad_output.shape[1]);
+            var repeatedIndices = indices.unsqueeze(1).expand(-1, grad_output.shape[1]);
 
             grad_input.scatter_(0, repeatedIndices, grad_output);
-            return new() { grad_input.reshape(otherShape.Prepend(firstAxisDim).ToArray()) };
+            return new() { grad_input.reshape(otherShape.Prepend(firstAxisDim).ToArray()), null };
         }
 
         public static torch.Tensor apply(torch.Tensor input, torch.Tensor indices) {

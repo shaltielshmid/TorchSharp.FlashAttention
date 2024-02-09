@@ -89,16 +89,20 @@ namespace TorchSharp.FlashAttention.FlashAttentionFunctions
             return results.Array!.Select(Tensor.UnsafeCreateTensor).ToList();
         }
 
-        internal static torch.Tensor MaybeContiguous(torch.Tensor x) => x.stride(-1) != 1 ? x.contiguous() : x;
-
-        internal static IntPtr handle(torch.Tensor? x) => x is null || x.IsInvalid ? IntPtr.Zero : x.Handle;
-
         internal static void CheckForErrors() {
             var error = NativeMethods.THSFlash_get_and_reset_last_err();
 
             if (error != IntPtr.Zero) {
                 throw new ExternalException(Marshal.PtrToStringAnsi(error));
             }
+        }
+
+        private static torch.Tensor MaybeContiguous(torch.Tensor x) => x.stride(-1) != 1 ? x.contiguous() : x;
+
+        private static IntPtr handle(torch.Tensor? x) => x is null || x.IsInvalid ? IntPtr.Zero : x.Handle;
+
+        private static Tensor CreateTensor(IntPtr handle) {
+            return (Tensor)Activator.CreateInstance(typeof(Tensor), handle)!;
         }
     }
 }
