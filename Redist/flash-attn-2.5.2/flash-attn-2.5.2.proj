@@ -4,37 +4,23 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <FlashAttentionGitUrl>https://github.com/Dao-AILab/flash-attention.git</FlashAttentionGitUrl>
-    <FlashAttentionCloneFolder>$(MSBuildThisFileDirectory)../$(MSBuildProjectName)/flash-attention</FlashAttentionCloneFolder>
+    <FlashAttentionCloneFolder>$(MSBuildThisFileDirectory)flash-attention</FlashAttentionCloneFolder>
     <PatchFilePath>$(MSBuildThisFileDirectory)flash-attn-$(FlashAttentionVersion).patch</PatchFilePath>
   </PropertyGroup>
 
-  <Target Name="CloneFlashAttention" Condition="'$(TargetOS)' == 'windows'">
+  <Target Name="CloneFlashAttentionWindows" Condition="'$(TargetOS)' == 'windows'">
     <!-- Clone if the repo does not exist -->
     <Exec Command="if not exist $(FlashAttentionCloneFolder)\.git (git clone $(FlashAttentionGitUrl) $(FlashAttentionCloneFolder)) else (echo Repository already cloned)" />
-
-    <!-- Check the current tag -->
-    <Exec Command="git -C $(FlashAttentionCloneFolder) describe --tags --exact-match" ConsoleToMSBuild="true">
-      <Output TaskParameter="ConsoleOutput" PropertyName="CurrentTag" />
-    </Exec>
-
-    <!-- Checkout the specific tag if it is not already checked out -->
-    <Exec Command="if not &quot;$(CurrentTag)&quot; == &quot;v$(FlashAttentionVersion)&quot; (git -C $(FlashAttentionCloneFolder) fetch --tags &amp;&amp; git -C $(FlashAttentionCloneFolder) checkout tags/v$(FlashAttentionVersion))" />
   </Target>
 
-  <Target Name="CloneFlashAttention" Condition="'$(TargetOS)' == 'linux'">
+  <Target Name="CloneFlashAttentionLinux" Condition="'$(TargetOS)' == 'linux'">
     <!-- Clone if the repo does not exist -->
-    <Exec Command="if [ ! -d &quot;$(FlashAttentionCloneFolder)/.git&quot; ]; then git clone $(FlashAttentionGitUrl) $(FlashAttentionCloneFolder); fi" Condition="'$(TargetOS)' == 'linux'" />
-
-    <!-- Check the current tag -->
-    <Exec Command="git -C $(FlashAttentionCloneFolder) describe --tags --exact-match" ConsoleToMSBuild="true">
-      <Output TaskParameter="ConsoleOutput" PropertyName="CurrentTag" />
-    </Exec>
-
-    <!-- Checkout the specific tag if it is not already checked out -->
-    <Exec Command="if [ &quot;$(CurrentTag)&quot; != &quot;v$(FlashAttentionVersion)&quot; ]; then git -C &quot;$FlashAttentionCloneFolder&quot; fetch --tags &amp;&amp; git -C &quot;$FlashAttentionCloneFolder&quot; checkout tags/v$(FlashAttentionVersion); fi" />
+    <Exec Command="if [ ! -d &quot;$(FlashAttentionCloneFolder)/.git&quot; ]; then git clone $(FlashAttentionGitUrl) $(FlashAttentionCloneFolder); fi" />
   </Target>
 
-  <Target Name="CloneAndInitFlashAttention" DependsOnTargets="CloneFlashAttention">
+  <Target Name="CloneAndInitFlashAttention" DependsOnTargets="CloneFlashAttentionWindows;CloneFlashAttentionLinux">
+    <!-- Checkout the relevant commit -->
+    <Exec Command="git -C $(FlashAttentionCloneFolder) checkout $(FlashAttentionCommitHash)" />
     <!-- Initialize and update submodules -->
     <Exec Command="git -C $(FlashAttentionCloneFolder) submodule init" />
     <Exec Command="git -C $(FlashAttentionCloneFolder) submodule update" />
