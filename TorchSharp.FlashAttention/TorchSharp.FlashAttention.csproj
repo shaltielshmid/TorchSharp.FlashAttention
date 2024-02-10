@@ -21,10 +21,7 @@
   </Target>
 
   <ItemGroup>
-    <Reference Include="TorchSharp">
-      <HintPath>..\..\TorchSharp\bin\AnyCPU.Release\TorchSharp\net6.0\TorchSharp.dll</HintPath>
-    </Reference>
-    <!--PackageReference Include="TorchSharp" Version="[0.101.3,)" PrivateAssets="All" /-->
+    <PackageReference Include="TorchSharp" Version="[0.101.6,)" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetOS)' == 'windows'">
