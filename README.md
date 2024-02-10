@@ -1,5 +1,8 @@
 # TorchSharp.FlashAttention
 
+[![TorchSharp.FlashAttention-windows](https://img.shields.io/nuget/v/TorchSharp.FlashAttention-windows.svg)](https://www.nuget.org/packages/TorchSharp.FlashAttention-windows/)
+[![TorchSharp.FlashAttention-linux](https://img.shields.io/nuget/v/TorchSharp.FlashAttention-linux.svg)](https://www.nuget.org/packages/TorchSharp.FlashAttention-linux/)
+
 ## Introduction
 TorchSharp.FlashAttention is a C# wrapper for the Flash Attention algorithm, leveraging the capabilities of TorchSharp for efficient deep learning in .NET environments. The Flash Attention algorithm, developed by Dao-AILab, is a groundbreaking method for accelerating attention computation in Transformer models. It significantly reduces memory usage and computation time, enabling faster and more efficient processing of large-scale data, especially in natural language processing and computer vision tasks.
 
