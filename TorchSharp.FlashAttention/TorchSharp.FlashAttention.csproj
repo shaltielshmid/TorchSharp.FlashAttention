@@ -16,47 +16,59 @@
     <MSBuild Projects="..\Native\build.proj" Condition="'$(SkipNative)' != 'true'" RemoveProperties="TargetFramework" Targets="Build" />
   </Target>
 
-  <Target Name="RealPack">
-    <MSBuild Projects="..\..\pkg\pack.proj" Targets="Pack" />
-  </Target>
-
   <ItemGroup>
     <PackageReference Include="TorchSharp" Version="[0.101.6,)" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetOS)' == 'windows'">
-    <None Include="..\Native\build-win\Release\LibFlashAttention.dll" Link="runtimes\win-x64\native\LibFlashAttention.dll">
+    <None Include="..\Native\build-win\Release\LibFlashAttention.dll" >
+      <Link>runtimes\win-x64\native\LibFlashAttention.dll</Link>
+      <PackagePath>runtimes\win-x64\native\LibFlashAttention.dll</PackagePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
-    <None Include="..\Native\build-win\Release\LibFlashAttention.lib" Link="runtimes\win-x64\native\LibFlashAttention.lib">
+    <None Include="..\Native\build-win\Release\LibFlashAttention.lib" >
+      <Link>runtimes\win-x64\native\LibFlashAttention.lib</Link>
+      <PackagePath>runtimes\win-x64\native\LibFlashAttention.lib</PackagePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
-    <None Include="..\Native\build-win\Release\LibFlashAttention.exp" Link="runtimes\win-x64\native\LibFlashAttention.exp">
+    <None Include="..\Native\build-win\Release\LibFlashAttention.exp" >
+      <Link>runtimes\win-x64\native\LibFlashAttention.exp</Link>
+      <PackagePath>runtimes\win-x64\native\LibFlashAttention.exp</PackagePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
-    <None Include="..\Redist\compiled-runtimes\win-x64\native\flash_attn.dll" Link="runtimes\win-x64\native\flash_attn.dll">
+    <None Include="..\Redist\compiled-runtimes\win-x64\native\flash_attn.dll" >
+      <Link>runtimes\win-x64\native\flash_attn.dll</Link>
+      <PackagePath>runtimes\win-x64\native\flash_attn.dll</PackagePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
-    <None Include="..\Redist\compiled-runtimes\win-x64\native\flash_attn.lib" Link="runtimes\win-x64\native\flash_attn.lib">
+    <None Include="..\Redist\compiled-runtimes\win-x64\native\flash_attn.lib" >
+      <Link>runtimes\win-x64\native\flash_attn.lib</Link>
+      <PackagePath>runtimes\win-x64\native\flash_attn.lib</PackagePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <Pack>true</Pack>      
+      <Pack>true</Pack>
     </None>
-    <None Include="..\Redist\compiled-runtimes\win-x64\native\flash_attn.exp" Link="runtimes\win-x64\native\flash_attn.exp">
+    <None Include="..\Redist\compiled-runtimes\win-x64\native\flash_attn.exp" >
+      <Link>runtimes\win-x64\native\flash_attn.exp</Link>
+      <PackagePath>runtimes\win-x64\native\flash_attn.exp</PackagePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetOS)' == 'linux'">
-    <None Include="..\Native\build-linux\libLibFlashAttention.so" Link="runtimes\linux-x64\native\libLibFlashAttention.so">
+    <None Include="..\Native\build-linux\libLibFlashAttention.so">
+      <Link>runtimes\linux-x64\native\libLibFlashAttention.so</Link>
+      <PackagePath>runtimes\linux-x64\native\libLibFlashAttention.so</PackagePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
-    <None Include="..\Redist\compiled-runtimes\linux-x64\native\libflash_attn.so" Link="runtimes\linux-x64\native\libflash_attn.so">
+    <None Include="..\Redist\compiled-runtimes\linux-x64\native\libflash_attn.so">
+      <Link>runtimes\linux-x64\native\libflash_attn.so</Link>
+      <PackagePath>runtimes\linux-x64\native\libflash_attn.so</PackagePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
     </None>
@@ -66,7 +78,7 @@
     <AssemblyName Condition="'$(TargetOS)' == 'linux'">TorchSharp.FlashAttention-linux</AssemblyName>
     <AssemblyName Condition="'$(TargetOS)' == 'windows'">TorchSharp.FlashAttention-windows</AssemblyName>
     <Authors>Shaltiel Shmidman</Authors>
-    <!--PackageReadmeFile>README.md</PackageReadmeFile-->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/shaltielshmid/TorchSharp.FlashAttention</PackageProjectUrl>
     <RepositoryUrl>https://github.com/shaltielshmid/TorchSharp.FlashAttention.git</RepositoryUrl>
@@ -76,4 +88,8 @@
     <FileVersion>0.1.0.0</FileVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  
 </Project>

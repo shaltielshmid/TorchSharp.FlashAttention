@@ -161,4 +161,7 @@
     <Target Name="Build">
   <!-- Intentionally left blank to disable standard build -->
   </Target>
+    <Target Name="Pack">
+  <!-- Intentionally left blank to disable standard build -->
+  </Target>
 </Project>
