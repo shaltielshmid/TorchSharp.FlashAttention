@@ -13,7 +13,7 @@ TorchSharp.FlashAttention is available on NuGet. Due to the size of the binaries
 ### Prerequisites
 
 - .NET SDK 6.0+
-- `TorchSharp-cuda-windows` or `TorchSharp-cuda-linux` package, version 0.101.6+
+- `TorchSharp-cuda-windows` or `TorchSharp-cuda-linux` package, version 0.102.0+
 
 For building from source, see [below](#building-from-source).
 
@@ -23,7 +23,7 @@ All the attention-related functions in the flash_attn package have been ported o
 
 For each function, we allow all the parameters that are accessible through the Python interface.
 
-The package currently references FlashAttention 2.5.2, including AliBi embeddings and forward with KV cache. 
+The package currently references FlashAttention 2.5.5, including AliBi embeddings and forward with KV cache. 
 
 The interfaces that have been ported over:
 
@@ -100,7 +100,7 @@ class MyModule<torch.Tensor, torch.Tensor, torch.Tensor> {
 
 There are multiple steps to building from source - we need to compile the cuda binaries, build the Native library bindings, and then build the C# library. 
 
-Compiling the cuda binaries can take a long time, and therefore I included them as LFS objects in the repository. If you want to recompile, I include instructions below how to recompile. 
+Compiling the cuda binaries can take a long time, and therefore you can download them from [here](https://www.dropbox.com/scl/fi/ckfu9b1b7lbonly5ccx7p/cpp-compiled-runtimes-flash2.5.5.zip?rlkey=z75xlubblgwfaqj5slnq80j11&dl=1), this ZIP should be extracted into `Redist/compiled-runtimes`. If you want to recompile, I include instructions below how to recompile. 
 
 Step 1: Clone the repository:
    ```bash
@@ -131,7 +131,7 @@ On linux:
 ### Compiling Flash Attention cuda binaries
 
 - Make sure you run a build at least once, so that the source code is retrieved.
-- Navigate to `TorchSharp.FlashAttention\Redist\flash-attn-2.5.2`
+- Navigate to `TorchSharp.FlashAttention\Redist\flash-attn-2.5.5`
 - Run either `compile_flash.bat` (for windows) or `bash compile_flash.sh` (for linux). 
 
 ## Acknowledgments

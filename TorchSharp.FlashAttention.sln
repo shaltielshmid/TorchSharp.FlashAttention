@@ -14,8 +14,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibFlashAttention", "Native
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Redist", "Redist", "{D8C60CD8-8429-45F2-A755-47B6CD10FDF8}"
 	ProjectSection(SolutionItems) = preProject
-		Redist\flash-attn-2.5.2\flash-attn-2.5.2.proj = Redist\flash-attn-2.5.2\flash-attn-2.5.2.proj
 		Redist\libtorch-cuda-12.1\libtorch-cuda-12.1.proj = Redist\libtorch-cuda-12.1\libtorch-cuda-12.1.proj
+		Redist\flash-attn-2.5.5\flash-attn-2.5.5.proj = Redist\flash-attn-2.5.5\flash-attn-2.5.5.proj
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4E6477E2-7EE0-48E5-B4BE-CC4C1748167B}"
