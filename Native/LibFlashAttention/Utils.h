@@ -16,7 +16,7 @@ extern thread_local char* flash_last_err = nullptr;
   try { \
     flash_last_err = 0; \
     x \
-  } catch (const c10::Error e) { \
+  } catch (const c10::Error& e) { \
       flash_last_err = strdup(e.what()); \
   } catch (const std::runtime_error e) { \
       flash_last_err = strdup(e.what()); \
