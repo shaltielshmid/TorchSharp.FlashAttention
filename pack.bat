@@ -1,0 +1,1 @@
+dotnet pack TorchSharp.FlashAttention -c Release /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=%1
