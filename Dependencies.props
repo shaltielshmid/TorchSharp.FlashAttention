@@ -2,7 +2,7 @@
 
   <!-- Other/Non-Core Product Dependencies -->
   <PropertyGroup>
-    <LibTorchVersion>2.2.1</LibTorchVersion>
+    <LibTorchVersion>2.4.0</LibTorchVersion>
     <CudaVersionDot>12.1</CudaVersionDot>
     <CudaVersionNoDot>121</CudaVersionNoDot>
     <CudaPath>$(CUDA_PATH_V12_1)</CudaPath>
