@@ -18,7 +18,8 @@ TorchSharp.FlashAttention is available on NuGet. Due to the size of the binaries
 ### Compatibility:
 
 - For `TorchSharp` version `0.102.x`, use `TorchSharp.FlashAttention` version `<= 0.2.2`
-- For `TorchSharp` version `>= 0.103.x`, use `TorchSharp.FlashAttention` version `>= 0.3.0`
+- For `TorchSharp` version `>= 0.103.x` and `<= 0.104.x`, use `TorchSharp.FlashAttention` version `== 0.3.0`
+- For `TorchSharp` version `>= 0.105.x`, use `TorchSharp.FlashAttention` version `>= 0.4.0`
 
 For building from source, see [below](#building-from-source).
 
@@ -144,6 +145,8 @@ On linux:
 - [Flash Attention 2.5.5 with LibTorch 2.2.1](https://www.dropbox.com/scl/fi/ckfu9b1b7lbonly5ccx7p/cpp-compiled-runtimes-flash2.5.5-torch2.2.1.zip?rlkey=z75xlubblgwfaqj5slnq80j11&dl=1)
 
 - [Flash Attention 2.5.5 with LibTorch 2.4.0](https://www.dropbox.com/scl/fi/e0e32m8h4tqilscj4mztj/cpp-compiled-runtimes-flash2.5.5-torch2.4.0.zip?rlkey=kz9ei12ai1qk6ctzpvkjiyg6g&dl=1)
+
+- [Flash Attention 2.5.5 with LibTorch 2.5.1](https://www.dropbox.com/s/naau7fs2mritlgu/cpp-compiled-runtimes-flash2.5.5-torch2.5.1.zip?dl=1)
 
 ## Acknowledgments
 This project is a C# wrapper around the original [Flash Attention implementation by Dao-AILab](https://github.com/Dao-AILab/flash-attention). Immense gratitude goes to the creators and contributors of Flash Attention for their innovative work and for providing guidelines to encourage community-driven adaptations and extensions.
